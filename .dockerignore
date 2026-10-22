@@ -1,0 +1,12 @@
+.venv
+venv
+__pycache__
+*.pyc
+.env
+.git
+.pytest_cache
+notebooks
+tests
+data/raw
+artifacts/history.db
+artifacts/random_forest_clf.joblib
