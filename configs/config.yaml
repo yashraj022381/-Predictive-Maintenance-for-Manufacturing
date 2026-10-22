@@ -1,0 +1,15 @@
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  artifacts_dir: artifacts
+
+data:
+  dataset: FD001
+  rul_cap: 125          # explained below
+  failure_horizon: 30   # "will fail within 30 cycles?" = failure class
+
+random_seed: 42
+
+features:
+  window: 10
+  val_fraction: 0.2     # 20% of engines held out for validation
