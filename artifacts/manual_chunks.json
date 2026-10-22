@@ -1,0 +1,80 @@
+[
+  {
+    "id": "HPC-01",
+    "title": "HPC-01: HPC outlet temperature rising",
+    "source": "compressor_manual.md",
+    "text": "Compressor Section Maintenance Manual (fictional training document) | HPC-01: HPC outlet temperature rising\nSignature: HPC outlet temperature (s3) sits clearly above its healthy typical level and keeps climbing, often together with HPC outlet static pressure (s11) rising.\nLikely causes: fouled or eroded compressor blades, worn blade-tip clearances, leaking seals. All of these reduce compressor efficiency, so the air leaves hotter.\nActions: borescope-inspect HPC blades and tip clearances; check the date of the last compressor wash and wash if overdue; compare the efficiency trend over the last 50 cycles.\nEscalate if: the rise continues across consecutive checks or fuel flow ratio (s12) starts dropping."
+  },
+  {
+    "id": "HPC-02",
+    "title": "HPC-02: HPC pressure and fuel flow shifts",
+    "source": "compressor_manual.md",
+    "text": "Compressor Section Maintenance Manual (fictional training document) | HPC-02: HPC pressure and fuel flow shifts\nSignature: HPC outlet static pressure (s11) drifting up while HPC outlet pressure (s7) or fuel flow ratio (s12) drifts down.\nLikely causes: internal air leakage, stator vane wear, compressor stall margin loss.\nActions: leak-check the compressor casing and seals; inspect variable stator vanes for wear and correct angle; review fuel flow trend.\nEscalate if: pressure and fuel flow keep diverging over the next 20 cycles."
+  },
+  {
+    "id": "LPC-01",
+    "title": "LPC-01: LPC outlet temperature rising",
+    "source": "compressor_manual.md",
+    "text": "Compressor Section Maintenance Manual (fictional training document) | LPC-01: LPC outlet temperature rising\nSignature: LPC outlet temperature (s2) slowly higher than its healthy typical level.\nLikely causes: early-stage fouling of low-pressure compressor blades, leaking bleed valve.\nActions: inspect LPC blades for deposits; test the bleed valve for leakage; clean if fouled.\nEscalate if: HPC outlet temperature (s3) is also rising; see HPC-01."
+  },
+  {
+    "id": "FAN-01",
+    "title": "FAN-01: Bypass ratio increasing",
+    "source": "fan_bypass_manual.md",
+    "text": "Fan and Bypass Manual (fictional training document) | FAN-01: Bypass ratio increasing\nSignature: bypass ratio (s15) creeping above its healthy typical level.\nLikely causes: core components losing efficiency so the airflow balance shifts, or eroded fan blades.\nActions: inspect fan blades for erosion or damage; check bypass-duct seals; if compressor or turbine sensors also drift, follow HPC-01 and TUR-01.\nEscalate if: bypass ratio keeps rising together with core temperatures."
+  },
+  {
+    "id": "FAN-02",
+    "title": "FAN-02: Fan and core speed deviation",
+    "source": "fan_bypass_manual.md",
+    "text": "Fan and Bypass Manual (fictional training document) | FAN-02: Fan and core speed deviation\nSignature: fan speed (s8), core speed (s9), corrected fan speed (s13) or corrected core speed (s14) drifting away from typical for the same load.\nLikely causes: bearing wear, imbalance, control sensor drift.\nActions: check vibration and bearing condition; calibrate speed sensors; inspect shaft couplings.\nEscalate if: speed deviation grows or vibration rises."
+  },
+  {
+    "id": "FAN-03",
+    "title": "FAN-03: Bypass-duct pressure abnormal",
+    "source": "fan_bypass_manual.md",
+    "text": "Fan and Bypass Manual (fictional training document) | FAN-03: Bypass-duct pressure abnormal\nSignature: bypass-duct pressure (s6) away from typical.\nLikely causes: duct leakage, damaged acoustic liner, loose panels.\nActions: inspect duct panels and seals for gaps; pressure-test the duct.\nEscalate if: pressure keeps changing across consecutive checks."
+  },
+  {
+    "id": "POL-01",
+    "title": "POL-01: Urgency levels",
+    "source": "maintenance_policy.md",
+    "text": "Maintenance Policy (fictional training document) | POL-01: Urgency levels\nLevel 1 WATCH: risk below the alarm line and estimated cycles left above 60. Keep routine checks and re-review at the next scheduled check.\nLevel 2 PLAN: risk at or above the alarm line, or estimated cycles left between 30 and 60. Schedule an inspection within the next 20 cycles and pre-order likely parts.\nLevel 3 URGENT: estimated cycles left between 10 and 30. Inspect at the next available stop and restrict to light duty.\nLevel 4 STOP: fewer than 10 cycles left, or risk above 95% with several sensors worsening. Take the machine out of service and inspect before any further use."
+  },
+  {
+    "id": "POL-02",
+    "title": "POL-02: Before any inspection",
+    "source": "maintenance_policy.md",
+    "text": "Maintenance Policy (fictional training document) | POL-02: Before any inspection\nIsolate power and apply lockout/tagout. Record the sensor readings and cycle count. Use only approved tools and log every finding in the maintenance record."
+  },
+  {
+    "id": "POL-03",
+    "title": "POL-03: Several sensors drifting together",
+    "source": "maintenance_policy.md",
+    "text": "Maintenance Policy (fictional training document) | POL-03: Several sensors drifting together\nWhen three or more sensors drift together, treat it as general gas-path wear rather than a single faulty part. Raise the urgency by one level and inspect the whole path, not just one component."
+  },
+  {
+    "id": "POL-04",
+    "title": "POL-04: Limits of predictions",
+    "source": "maintenance_policy.md",
+    "text": "Maintenance Policy (fictional training document) | POL-04: Limits of predictions\nModel risk and remaining-life figures are statistical estimates, not diagnoses. Confirm by physical inspection before replacing any part, and record the outcome so the models can be improved."
+  },
+  {
+    "id": "TUR-01",
+    "title": "TUR-01: LPT outlet temperature rising",
+    "source": "turbine_cooling_manual.md",
+    "text": "Turbine and Cooling Manual (fictional training document) | TUR-01: LPT outlet temperature rising\nSignature: low-pressure turbine outlet temperature (s4) above its healthy typical level.\nLikely causes: turbine blade wear, loss of cooling air, or inefficient upstream compressors passing hotter air.\nActions: borescope-inspect turbine blades; check cooling flow (see COOL-01); review compressor findings (see HPC-01).\nEscalate if: temperature rises while coolant bleed flow falls."
+  },
+  {
+    "id": "COOL-01",
+    "title": "COOL-01: Coolant bleed flow dropping",
+    "source": "turbine_cooling_manual.md",
+    "text": "Turbine and Cooling Manual (fictional training document) | COOL-01: Coolant bleed flow dropping\nSignature: HPT coolant bleed (s20) or LPT coolant bleed (s21) below typical.\nLikely causes: clogged cooling passages, leaking or stuck bleed valves, worn seals. Less cooling can overheat turbine blades.\nActions: inspect and flow-test bleed valves and lines; clear blocked passages; inspect turbine blades for heat damage.\nEscalate if: coolant flow keeps falling or turbine outlet temperature (s4) rises."
+  },
+  {
+    "id": "BLD-01",
+    "title": "BLD-01: Bleed enthalpy rising",
+    "source": "turbine_cooling_manual.md",
+    "text": "Turbine and Cooling Manual (fictional training document) | BLD-01: Bleed enthalpy rising\nSignature: bleed enthalpy (s17) above its healthy typical level.\nLikely causes: compressor inefficiency heating the bleed air, heat soak in the core.\nActions: verify against compressor temperatures (see HPC-01 and LPC-01); inspect bleed lines for damage.\nEscalate if: other core temperatures are also rising."
+  }
+]
