@@ -14,7 +14,7 @@ from fastapi import FastAPI, HTTPException, Query
 from src.api import db
 from src.api.schemas import AnalysisResponse, Prediction, PredictRequest
 from src.data.loader import load_config
-from src.models.detector import Detector
+#from src.models.detector import Detector
 from src.genai.agents import MaintenanceCrew
 
 
@@ -32,6 +32,12 @@ async def lifespan(app: FastAPI):
     state["art"] = Path(cfg["paths"]["artifacts_dir"])
     fleet = pd.read_csv(Path(cfg["paths"]["processed_dir"]) / "test.csv")
     state["fleet"] = fleet.sort_values(["unit", "cycle"]).reset_index(drop=True)
+    #state["detector"] = Detector()
+    state["lite"] = os.getenv("PM_LITE", "").strip() == "1"
+    if state["lite"]:
+        from src.models.detector_lite import DetectorLite as Detector
+    else:
+        from src.models.detector import Detector
     state["detector"] = Detector()
     state["crew"] = None
     db.init_db()
@@ -73,6 +79,7 @@ def _ai_budget_left() -> bool:
 @app.get("/health")
 def health():
     return {"status": "ok", "machines": int(state["fleet"]["unit"].nunique()),
+            "mode": "lite" if state.get("lite") else "full",
             "llm_ready": bool(os.getenv("GROQ_API_KEY"))}
 
 
