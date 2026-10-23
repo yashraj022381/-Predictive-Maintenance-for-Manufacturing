@@ -23,7 +23,7 @@ EXPLAIN_PROMPT = ChatPromptTemplate.from_messages([
 Use ONLY the facts in DETECTOR REPORT and SENSOR EVIDENCE. Quote numbers exactly as written, add no units, never invent values.
 Say 'consistent with', never claim a confirmed diagnosis. Plain English; explain technical terms in a few words.
 Write 3 to 5 sentences, no headings, no lists. State the failure risk percentage and the estimated cycles left,
-and say what the two anomaly checks found."""),
+and say what the anomaly checks found; do not mention any check described as not run."""),
     ("human", "DETECTOR REPORT\n{report}\n\nSENSOR EVIDENCE\n{evidence}\n\nWrite the explanation.")])
 
 RECOMMEND_PROMPT = ChatPromptTemplate.from_messages([
@@ -133,7 +133,7 @@ class MaintenanceCrew:
         d = state["detection"]
         return {"explanation": (f"Failure risk is {d['risk']:.1%}, below the alarm line of "
                                 f"{d['threshold']:.0%}. Estimated cycles left: {d['rul_text']}. "
-                                f"Both anomaly checks are normal."),
+                                f"The anomaly check is normal." if d.get("lite") else Both anomaly checks are normal."),
                 "actions": "1. No action needed. Keep routine checks. [POL-01]",
                 "unknown_citations": [], "chunks": [], "evidence": [],
                 "trace": state["trace"] + ["all_clear (LLM skipped)"]}
