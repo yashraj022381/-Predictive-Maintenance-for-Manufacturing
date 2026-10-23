@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+artifacts/random_forest_clf.joblib
+data/processed/val.csv
