@@ -5,7 +5,7 @@ import re
 import numpy as np
 
 from pathlib import Path
-from sentence_transformers import SentenceTransformer
+#from sentence_transformers import SentenceTransformer
 from src.data.loader import load_config
 
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -45,9 +45,16 @@ class ManualIndex:
         else:
             self.build()
 
+    #@property
+    #def encoder(self):
+    #    if self._encoder is None:
+    #        self._encoder = SentenceTransformer(EMBED_MODEL)
+    #    return self._encoder
+    
     @property
     def encoder(self):
         if self._encoder is None:
+            from sentence_transformers import SentenceTransformer   # only loaded when needed
             self._encoder = SentenceTransformer(EMBED_MODEL)
         return self._encoder
 
