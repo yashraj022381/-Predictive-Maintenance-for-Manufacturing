@@ -6,6 +6,7 @@ import tempfile
 import time
 from collections import deque
 from pathlib import Path
+from src.models.detector_lite import DetectorLite
 
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)                      # the project uses paths relative to the project root
