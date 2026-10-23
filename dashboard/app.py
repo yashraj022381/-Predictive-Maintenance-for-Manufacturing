@@ -6,7 +6,14 @@ import pandas as pd
 import requests
 import streamlit as st
 
-API = os.getenv("API_URL", "http://127.0.0.1:8000")
+#API = os.getenv("API_URL", "http://127.0.0.1:8000")
+API = os.getenv("API_URL", "")
+if not API:
+    try:
+        API = st.secrets["API_URL"]          # set in Streamlit Cloud's Secrets box
+    except Exception:
+        API = "http://127.0.0.1:8000"
+API = API.rstrip("/")
 ICON = {1: "🟢", 2: "🟡", 3: "🟠", 4: "🔴"}
 st.set_page_config(page_title="Predictive Maintenance", layout="wide")
 
@@ -23,10 +30,32 @@ def call(method: str, path: str, timeout: int = 30, **kw):
 
 st.title("🏭 Predictive Maintenance Dashboard")
 machines = call("GET", "/machines")
+#if not machines:
+#    st.warning("Cannot reach the API. Start it first:  uvicorn src.api.main:app --port 8000")
+#    st.stop()
+#last = {m["unit"]: m["last_cycle"] for m in machines}
+
+def wake_backend() -> bool:
+    """Free servers sleep when idle. Knock until the backend answers."""
+    for _ in range(12):
+        try:
+            if requests.get(f"{API}/health", timeout=25).ok:
+                return True
+        except requests.RequestException:
+            pass
+        time.sleep(5)
+    return False
+
+
+if not st.session_state.get("awake"):
+    with st.spinner("Waking up the backend (free servers sleep, this can take about a minute)..."):
+        st.session_state.awake = wake_backend()
+
+machines = call("GET", "/machines") if st.session_state.awake else None
 if not machines:
-    st.warning("Cannot reach the API. Start it first:  uvicorn src.api.main:app --port 8000")
+    st.session_state.awake = False
+    st.warning("Cannot reach the backend yet. Wait a minute, then refresh the page.")
     st.stop()
-last = {m["unit"]: m["last_cycle"] for m in machines}
 
 ss = st.session_state
 
@@ -85,8 +114,13 @@ with live:
         m[1].metric("Estimated cycles left",
                     f"{cur['rul']:.0f}" + ("+" if cur["rul"] >= 124 else ""))
         m[2].metric("Isolation Forest", "FLAGGED" if cur["iforest_flag"] else "normal")
-        m[3].metric("Autoencoder", "FLAGGED" if cur["ae_flag"] else "normal")
-
+        #m[3].metric("Autoencoder", "FLAGGED" if cur["ae_flag"] else "normal")
+        m[3].metric("Autoencoder", "off (lite)" if cur.get("lite")
+                    else ("FLAGGED" if cur["ae_flag"] else "normal"))
+        if cur.get("lite"):
+            st.caption("The live demo runs in lightweight mode (XGBoost remaining-life model, "
+                       "Isolation Forest only). The full version with LSTM and autoencoder "
+                       "runs through Docker; see the README.")
         df = pd.DataFrame(ss.trace).set_index("cycle")
         df["alarm line"] = cur["threshold"]
         left, right = st.columns(2)
