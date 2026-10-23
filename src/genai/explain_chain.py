@@ -16,8 +16,9 @@ from langchain_groq import ChatGroq
 
 from src.data.loader import load_config
 from src.explain.names import SENSOR_NAMES
-from src.explain.shap_explainer import RiskExplainer
-from src.genai.rag import ManualIndex, DASHES
+#from src.explain.shap_explainer import RiskExplainer
+#from src.genai.rag import ManualIndex, DASHES
+from src.genai.rag import DASHES
 
 SYSTEM = """You are a maintenance assistant for a plant technician.
 Use ONLY the facts in SENSOR EVIDENCE and MANUAL EXCERPTS. Never invent sensor values, procedures or procedure IDs.
@@ -82,7 +83,8 @@ def sensor_evidence(driver: dict, scaler, sensors: list[str], healthy: pd.Series
             "text": f"{text}; model effect: {driver['effect']}"}
 
 
-def retrieve(index: ManualIndex, evidence: list[dict]) -> list[dict]:
+#def retrieve(index: ManualIndex, evidence: list[dict]) -> list[dict]:
+def retrieve(index, evidence: list[dict]) -> list[dict]:
     """One search per distinct sensor symptom + one search for the policy."""
     seen, out = set(), []
     queries = list(dict.fromkeys(f"{e['sensor']} {e['direction']}"
@@ -98,6 +100,8 @@ def retrieve(index: ManualIndex, evidence: list[dict]) -> list[dict]:
 
 class GenAIExplainer:
     def __init__(self, config_path: str = "configs/config.yaml"):
+        from src.explain.shap_explainer import RiskExplainer
+        from src.genai.rag import ManualIndex
         cfg = load_config(config_path)
         art, proc = Path(cfg["paths"]["artifacts_dir"]), Path(cfg["paths"]["processed_dir"])
         self.sensors = json.loads((art / "feature_cols.json").read_text())["sensors"]
