@@ -166,6 +166,7 @@ def format_report(s: dict) -> str:
 
 
 if __name__ == "__main__":
+    from src.models.detector import pick_engines
     cfg = load_config()
     test = pd.read_csv(Path(cfg["paths"]["processed_dir"]) / "test.csv")
     crew = MaintenanceCrew()
