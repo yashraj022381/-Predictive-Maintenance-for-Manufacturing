@@ -96,6 +96,12 @@ class MaintenanceCrew:
         if "POL-02" in by_id and "POL-02" not in {c["id"] for c in chunks}:
             chunks.append(by_id["POL-02"])                    # safety step is always available
 
+        if d.get("lite"):
+            ae_line = "Autoencoder anomaly check: not run (lightweight deployment)."
+        else:
+            ae_line = (f"Autoencoder anomaly check: {'FLAGGED' if d['ae_flag'] else 'normal'} "
+                       f"(score {d['ae_score']:.3f}, limit {d['ae_limit']:.3f}).")
+
         report = (
             f"Machine unit {d['unit']}, cycle {d['cycle']}.\n"
             f"Failure risk {d['risk']:.1%} (alarm line {d['threshold']:.0%}, "
