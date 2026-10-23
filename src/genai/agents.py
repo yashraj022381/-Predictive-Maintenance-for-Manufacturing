@@ -1,10 +1,14 @@
 """Phase 6b: Detector -> Explainer -> Recommender as a LangGraph relay."""
+import os
 import re
+import joblib
+import pandas as pd
+
+
 from pathlib import Path
 from typing import TypedDict
 
-import joblib
-import pandas as pd
+
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import END, START, StateGraph
@@ -12,7 +16,7 @@ from langgraph.graph import END, START, StateGraph
 from src.data.loader import load_config
 from src.genai.explain_chain import get_llm, retrieve, sensor_evidence
 from src.genai.rag import DASHES, ManualIndex
-from src.models.detector import Detector, pick_engines
+#from src.models.detector import Detector, pick_engines
 
 EXPLAIN_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """You are the Explainer agent in a maintenance team. A Detector agent has already measured the machine.
@@ -48,8 +52,22 @@ class MaintenanceCrew:
     def __init__(self, config_path: str = "configs/config.yaml", detector=None):
         cfg = load_config(config_path)
         art, proc = Path(cfg["paths"]["artifacts_dir"]), Path(cfg["paths"]["processed_dir"])
-        self.detector = detector or Detector(config_path)
-        self.index = ManualIndex(config_path)
+        #self.detector = detector or Detector(config_path)
+        #self.index = ManualIndex(config_path)
+        lite = os.getenv("PM_LITE", "").strip() == "1"
+        if detector is None:
+            if lite:
+                from src.models.detector_lite import DetectorLite
+                detector = DetectorLite(config_path)
+            else:
+                from src.models.detector import Detector
+                detector = Detector(config_path)
+        self.detector = detector
+        if lite:
+            from src.genai.rag_lite import ManualIndexLite
+            self.index = ManualIndexLite(config_path)
+        else:
+            self.index = ManualIndex(config_path)
         self.sensors = self.detector.sensors
         self.scaler = joblib.load(art / "scaler.joblib")
         train = pd.read_csv(proc / "train.csv", usecols=self.sensors + ["rul"])
