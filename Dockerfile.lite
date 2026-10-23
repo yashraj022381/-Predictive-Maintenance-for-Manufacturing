@@ -1,1 +1,20 @@
+FROM python:3.12-slim
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PIP_NO_CACHE_DIR=1 \
+    PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10 \
+    PM_LITE=1 PM_DB_PATH=/tmp/history.db OMP_NUM_THREADS=1
+WORKDIR /app
 
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-lite.txt requirements-xgb.txt ./
+RUN pip install -r requirements-lite.txt \
+ && pip install --no-deps -r requirements-xgb.txt
+
+COPY configs ./configs
+COPY src ./src
+COPY data/processed/train.csv data/processed/test.csv ./data/processed/
+COPY data/manuals ./data/manuals
+COPY artifacts ./artifacts
+
+CMD ["sh", "-c", "uvicorn src.api.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
