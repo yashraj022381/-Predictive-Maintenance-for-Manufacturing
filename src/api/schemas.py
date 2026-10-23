@@ -24,9 +24,13 @@ class Prediction(BaseModel):
     iforest_score: float
     iforest_limit: float
     iforest_flag: bool
-    ae_score: float
-    ae_limit: float
-    ae_flag: bool
+    #ae_score: float
+    #ae_limit: float
+    #ae_flag: bool
+    ae_score: float | None = None
+    ae_limit: float | None = None
+    ae_flag: bool = False
+    lite: bool = False
     n_drift: int
     level: int
     level_name: str
