@@ -21,7 +21,7 @@ class DetectorLite:
         self.cols, self.sensors = meta["features"], meta["sensors"]
         self.risk = RiskExplainerLite(config_path)
         self.iforest = joblib.load(art / "isolation_forest.joblib")
-        self.thr = json.loads((art / "anomaly_thresholds.json").read_text())
+        self.thr = json.loads((art / "anomally_thresholds.json").read_text())
         self.rul_model = joblib.load(art / "rul_xgb.joblib")
         self.cap = json.loads((art / "rul_config.json").read_text())["rul_cap"]
 
