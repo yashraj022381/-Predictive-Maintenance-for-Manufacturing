@@ -38,7 +38,7 @@ MAX_AI_PER_HOUR = int(os.getenv("MAX_AI_PER_HOUR") or _secret("MAX_AI_PER_HOUR")
 # ---------- loaded once, shared by every visitor ----------
 @st.cache_resource(show_spinner="Loading models (first visit only)...")
 def load_detector():
-    #from src.models.detector_lite import DetectorLite
+    from src.models.detector_lite import DetectorLite
     return DetectorLite()
 
 
