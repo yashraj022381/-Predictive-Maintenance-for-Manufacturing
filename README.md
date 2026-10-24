@@ -14,6 +14,10 @@ app_port: 7860
 pinned: false
 ---
 
+## 🌐 Live Demo
+
+**👉 [Launch Live Dashboard](https://zifj5cfvx65phnbkvhunki.streamlit.app/)**
+
 # 🏭 Predictive Maintenance System
 
 Predicts **equipment failure risk** and **Remaining Useful Life (RUL)** from sensor data, detects
