@@ -133,7 +133,7 @@ class MaintenanceCrew:
     def all_clear_node(self, state: State) -> dict:
         d = state["detection"]
         anomaly_text = ("The anomaly check is normal." if d.get("lite")
-                        else: "Both anomaly checks are normal.")
+                        else "Both anomaly checks are normal.")
                        
         return {"explanation": (f"Failure risk is {d['risk']:.1%}, below the alarm line of "
                                 f"{d['threshold']:.0%}. Estimated cycles left: {d['rul_text']}. "
