@@ -109,8 +109,8 @@ class MaintenanceCrew:
             f"Estimated cycles left: {d['rul_text']}.\n"
             f"Isolation Forest anomaly check: {'FLAGGED' if d['iforest_flag'] else 'normal'} "
             f"(score {d['iforest_score']:.3f}, limit {d['iforest_limit']:.3f}).\n"
-            #f"Autoencoder anomaly check: {'FLAGGED' if d['ae_flag'] else 'normal'} "
-            f"Autoencoder anomally check: "{ae_line}\n"
+            f"Autoencoder anomaly check: {'FLAGGED' if d['ae_flag'] else 'normal'} "
+            #f"Autoencoder anomally check: "{ae_line}\n"
             f"(score {d['ae_score']:.3f}, limit {d['ae_limit']:.3f}).\n"
             f"Sensors drifting together: {d['n_drift']}.")
         text = self.explain_chain.invoke({
