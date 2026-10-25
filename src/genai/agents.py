@@ -112,7 +112,7 @@ class MaintenanceCrew:
             #f"Autoencoder anomally check: {'FLAGGED' if d['ae_flag'] else 'normal'} "
             #f"Autoencoder anomally check: "{ae_line}\n"
             f"{ae_line}\n"
-            f"(score {d['ae_score']:.3f}, limit {d['ae_limit']:.3f}).\n"
+            #f"(score {d['ae_score']:.3f}, limit {d['ae_limit']:.3f}).\n"
             f"Sensors drifting together: {d['n_drift']}.")
         text = self.explain_chain.invoke({
             "report": report, "evidence": "\n".join("- " + e["text"] for e in evidence)})
