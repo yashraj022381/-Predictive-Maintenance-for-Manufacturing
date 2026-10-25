@@ -134,7 +134,7 @@ class MaintenanceCrew:
         d = state["detection"]
         return {"explanation": (f"Failure risk is {d['risk']:.1%}, below the alarm line of "
                                 f"{d['threshold']:.0%}. Estimated cycles left: {d['rul_text']}. "
-                                f"The anomaly check is normal." if d.get("cited") else Both anomaly checks are normal."),
+                                f"The anomaly check is normal." if d.get("lite") else Both anomaly checks are normal."),
                 "actions": "1. No action needed. Keep routine checks. [POL-01]",
                 "unknown_citations": [], "chunks": [], "evidence": [],
                 "trace": state["trace"] + ["all_clear (LLM skipped)"]}
