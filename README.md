@@ -14,10 +14,6 @@ app_port: 7860
 pinned: false
 ---
 
-## 🌐 Live Demo
-
-**👉 [Launch Live Dashboard](https://zifj5cfvx65phnbkvhunki.streamlit.app/)**
-
 # 🏭 Predictive Maintenance System
 
 Predicts **equipment failure risk** and **Remaining Useful Life (RUL)** from sensor data, detects
@@ -27,6 +23,17 @@ backend, a live Streamlit dashboard, and Docker deployment.
 
 **Data:** NASA C-MAPSS turbofan engine degradation (FD001): 100 training engines run to failure,
 100 test engines stopped early.
+
+## 🌐 Live Demo
+
+**👉 [Launch Live Dashboard](https://zifj5cfvx65phnbkvhunki.streamlit.app/)**
+
+
+## 📸 Screenshots
+
+| Live Monitor | Alerts & History | Model Metrics |
+|--------------|------------------|---------------|
+| ![Live Monitor](docs/screenshots/live-monitor.png) | ![Alerts](docs/screenshots/alerts.png) | ![Metrics](docs/screenshots/metrics.png) |
 
 ## Architecture
 
@@ -134,3 +141,10 @@ Multi-condition datasets, uncertainty intervals for RUL, drift monitoring, authe
 sensor stream (Kafka/MQTT), and CI that runs the tests on every push.
 
 Data: NASA Prognostics Center of Excellence. Manuals in `data/manuals/` are fictional.
+
+📄 License & Credits
+MIT License.
+
+Data: NASA Prognostics Center of Excellence (C-MAPSS).
+
+Manuals in data/manuals/ are fictional for demonstration purposes.
