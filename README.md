@@ -35,9 +35,35 @@ backend, a live Streamlit dashboard, and Docker deployment.
 
 ## 📸 Screenshots
 
-| Live Monitor | Alerts & History | Model Metrics |
-|--------------|------------------|---------------|
-| ![Live Monitor](docs/screenshots/live-monitor.png) | ![Alerts](docs/screenshots/alerts.png) | ![Metrics](docs/screenshots/metrics.png) |
+|              Main UI              |
+|-----------------------------------|
+![Main-UI](screenshots/main-ui.png) |
+
+
+
+|              Live Monitor                        | 
+|--------------------------------------------------|
+| ![Live Monitors](screenshots/live-monitor-1.png) | 
+| ![Live Monitors](screenshots/live-monitor-2.png) |
+| ![Live Monitors](screenshots/live-monitor-3.png) |
+| ![Live Monitors](screenshots/live-monitor-4.png) |
+| ![Live Monitors](screenshots/live-monitor-5.png) |
+| ![Live Monitors](screenshots/live-monitor-6.png) |
+| ![Live Monitors](screenshots/live-monitor-7.png) |
+
+
+
+|           Alerts & History        |
+|-----------------------------------|
+| ![Alerts](screenshots/alerts.png) |
+
+
+|           Model Metrics               |
+|---------------------------------------|
+| ![Metrics](screenshots/metrics-1.png) |
+| ![Metrics](screenshots/metrics-2.png) |
+
+
 
 ## Architecture
 
