@@ -37,7 +37,7 @@ backend, a live Streamlit dashboard, and Docker deployment.
 
 |              Main UI              |
 |-----------------------------------|
-![Main-UI](screenshots/main-ui.png) |
+![Main-UI](screenshots/Main-UI.png) |
 
 
 
