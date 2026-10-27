@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-46E3B7?logo=render&logoColor=white)](https://YOUR-RENDER-URL.onrender.com)
 
+
 ---
 title: Predictive Maintenance
 emoji: 🏭
@@ -13,6 +14,9 @@ sdk: docker
 app_port: 7860
 pinned: false
 ---
+
+
+
 
 # 🏭 Predictive Maintenance System
 
